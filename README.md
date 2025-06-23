@@ -12,6 +12,51 @@ A complete full-stack Todo application built with React.js frontend and Node.js/
 - **Error Handling**: Comprehensive error handling and user feedback
 - **Loading States**: Visual feedback during API operations
 
+## Application Flow Diagram
+
+```mermaid
+graph TB
+    subgraph "Client Side (React - Port 3000)"
+        A[User Interface] --> B[AddTask Component]
+        A --> C[TasksTable Component]
+        A --> D[TasksSummary Component]
+        B --> E[Form Submission]
+        C --> F[Task Display & Delete]
+        D --> G[Statistics Display]
+    end
+    
+    subgraph "API Layer"
+        E --> H[POST /api/tasks]
+        F --> I[GET /api/tasks]
+        F --> J[DELETE /api/tasks/:id]
+        G --> K[GET /api/tasks/summary/counts]
+    end
+    
+    subgraph "Server Side (Node.js/Express - Port 5000)"
+        H --> L[Create Task Handler]
+        I --> M[Get All Tasks Handler]
+        J --> N[Delete Task Handler]
+        K --> O[Get Summary Handler]
+        L --> P[In-Memory Storage]
+        M --> P
+        N --> P
+        O --> P
+    end
+    
+    subgraph "Data Flow"
+        P --> Q[Task Array in Memory]
+        Q --> R[Response Data]
+        R --> S[JSON Response]
+        S --> T[Client State Update]
+        T --> U[UI Re-render]
+    end
+    
+    style A fill:#e1f5fe
+    style P fill:#fff3e0
+    style Q fill:#f3e5f5
+    style U fill:#e8f5e8
+```
+
 ## Technology Stack
 
 ### Backend
